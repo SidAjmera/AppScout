@@ -8,3 +8,6 @@ playwright-report/
 .vercel/
 
 .pnpm-store/
+
+# Generated from the curated catalog; regenerate with pnpm catalog:sql.
+/supabase/seed.sql

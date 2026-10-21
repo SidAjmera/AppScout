@@ -23,11 +23,11 @@ Open http://127.0.0.1:3000. On PowerShell use `Copy-Item .env.example .env.local
 ## Supabase setup
 
 1. Create a Supabase project. In SQL Editor run [001_appscout.sql](supabase/migrations/001_appscout.sql).
-2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` from that project. Only these two variables are public.
+2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` from that project. The legacy `NEXT_PUBLIC_SUPABASE_ANON_KEY` remains supported as a fallback. Only the URL and chosen public key belong in public variables.
 3. Generate a 32-byte encryption secret with `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. Set `BYOK_SESSION_SECRET` on the server. Do not prefix it with NEXT_PUBLIC.
-4. Seed the catalog: load `.env.local` into the environment and run `node --env-file=.env.local scripts/seed.mjs`. This needs `SUPABASE_SERVICE_ROLE_KEY` locally; the script never prints it.
+4. Seed the catalog: generate SQL with `pnpm catalog:sql` and run the generated `supabase/seed.sql` in the Supabase SQL editor after the migration. The SQL is repeatable and contains no credentials. Alternatively, load `.env.local` into the environment and run `node --env-file=.env.local scripts/seed.mjs`. This needs `SUPABASE_SERVICE_ROLE_KEY` locally; the script never prints it.
 5. In Supabase Authentication URL Configuration set the production Site URL and allow `https://YOUR-PROJECT.vercel.app/auth/callback`. Add `http://127.0.0.1:3000/auth/callback` for local development. Enable email/password auth and email confirmation.
-6. Configure Supabase email delivery as appropriate. Free email and database quotas are finite; check the dashboard and provider documentation before inviting users.
+6. Configure custom SMTP before opening email signup to the public. Supabase’s built-in test mail service only delivers to organization members; keep email confirmation enabled. Free email and database quotas are finite; check the dashboard and provider documentation before inviting users. See https://supabase.com/docs/guides/auth/auth-smtp.
 
 All user tables use RLS. Catalog data is publicly readable; edits require `app_metadata.role = "admin"` set by an operator through the Supabase dashboard or Admin API. Never use editable user_metadata for authorization. Normalized read-only platform, feature, pricing and source views project the curated app JSON; this keeps seed and editorial updates atomic.
 
