@@ -1,0 +1,1 @@
+import {AppScout} from '@/components/appscout';export default function Page(){return <AppScout/>;}

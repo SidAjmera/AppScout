@@ -1,0 +1,1 @@
+{"framework":"nextjs","buildCommand":"pnpm build","functions":{"src/app/api/ai/search/route.ts":{"maxDuration":60},"src/app/api/ai/connection/route.ts":{"maxDuration":30}}}
