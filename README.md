@@ -2,6 +2,12 @@
 
 Next.js + TypeScript software discovery, alternatives and comparison app. Designed for Vercel and Supabase, with no developer-funded AI key.
 
+**Live site:** https://appscout-sable.vercel.app
+
+**Source:** https://github.com/SidAjmera/AppScout
+
+Production is deployed from main through the connected Vercel GitHub integration. The current deployment uses the bundled catalog; Supabase account/database configuration is still required to enable authentication, bookmarks, saved preferences, and BYOK requests.
+
 ## Run locally
 
 Requires Node 22+ and pnpm 11 (the lockfile pins actual dependency versions).
@@ -76,7 +82,7 @@ Playwright uses installed Microsoft Edge for desktop and mobile Chromium emulati
 
 Unit tests include 40 catalog retrieval scenarios, mandatory filtering, personalized ranking, search overrides, confidence, score consistency, cookie encryption/tampering/user isolation/expiry, private-network rejection, safe error messages and input schemas. An additional 9 tests execute the complete migration in embedded PostgreSQL (PGlite), verifying actual RLS isolation, consent enforcement/withdrawal, administrator permissions, FTS, deletion and quotas. Auth claims are supplied by fixtures; this does not replace a live Supabase Auth/email check or a live AI evaluation.
 
-Import the repository into Vercel, use the Next.js preset, set the environment variables above, and deploy. Keep service role and BYOK encryption secrets server-only. Set the correct Supabase auth URLs after receiving your free vercel.app domain. No hosting deployment or external account setup was performed automatically. No credentials were provided in this workspace.
+Import the repository into Vercel, use the Next.js preset, set the environment variables above, and deploy. Keep service role and BYOK encryption secrets server-only. Set the correct Supabase auth URLs after receiving your free vercel.app domain. GitHub and Vercel hosting are now configured: the public repository is SidAjmera/AppScout and the Vercel project is appscout in sidajmera's projects (Hobby). Vercel uses Node 24 and ENABLE_EXPERIMENTAL_COREPACK=1 to honor the pinned pnpm version. Supabase credentials have not been provided or configured.
 
 Live signup/login, email confirmation, cross-user database RLS, saved preferences/bookmarks, deletion and real provider calls require configured accounts and must be checked before launch. Use two disposable test accounts in a development Supabase project; verify that each cannot read or write the other's rows, consent withdrawal purges stored data, and each provider's invalid/expired/quota errors are understandable. Performance and recommendation quality targets in the brief remain goals until measured with real provider traffic and user testing.
 
