@@ -1,1 +1,1 @@
-import {AppScout} from '@/components/appscout';export default function Page(){return <AppScout/>;}
+import {Toolnest} from '@/components/appscout';export default function Page(){return <Toolnest/>;}

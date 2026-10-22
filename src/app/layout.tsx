@@ -1,3 +1,3 @@
 import type {Metadata} from 'next';import './globals.css';import {Providers} from '@/components/providers';
-export const metadata:Metadata={title:'AppScout — Find software that actually fits.',description:'Discover, compare, and find alternatives to software. Evidence-backed details and recommendations tailored to your needs.'};
+export const metadata:Metadata={title:'Toolnest — Find software that actually fits.',description:'Discover, compare, and find alternatives to software. Evidence-backed details and recommendations tailored to your needs.'};
 export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" suppressHydrationWarning><body><Providers>{children}</Providers></body></html>;}
