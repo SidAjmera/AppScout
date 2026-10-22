@@ -4,7 +4,7 @@ Formerly AppScout.
 
 Next.js + TypeScript software discovery, alternatives and comparison app. Designed for Vercel and Supabase, with no developer-funded AI key.
 
-**Live site:** https://appscout-sable.vercel.app
+**Live site:** https://toolnest-discover.vercel.app
 
 **Source:** https://github.com/SidAjmera/AppScout
 
