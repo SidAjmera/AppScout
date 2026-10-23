@@ -4,7 +4,9 @@ Formerly AppScout.
 
 ## Shared Workspace
 
-Toolnest and Musecoach now have an equal place in [Workspace](https://sidajmera-workspace.vercel.app/), with one Supabase account, an app switcher, shared account settings, account-scoped device data, exports and separate app/account deletion controls. [Toolnest in Workspace](https://sidajmera-workspace.vercel.app/toolnest) uses the existing Toolnest account IDs and catalog. [Musecoach in Workspace](https://sidajmera-workspace.vercel.app/musecoach) offers per-take device or private cloud recording storage.
+Workspace now lives at **toolnest-musecoach.vercel.app**, with an illustrated home, equal app cards, a redesigned shared header and refreshed account/privacy pages. The former Workspace address stays available for exporting device-only data and shows a migration notice. Browser storage does not move automatically between addresses; sign in again for cloud data or restore an exported review backup and transfer audio explicitly.
+
+Toolnest and Musecoach now have an equal place in [Workspace](https://toolnest-musecoach.vercel.app/), with one Supabase account, an app switcher, shared account settings, account-scoped device data, exports and separate app/account deletion controls. [Toolnest in Workspace](https://toolnest-musecoach.vercel.app/toolnest) uses the existing Toolnest account IDs and catalog. [Musecoach in Workspace](https://toolnest-musecoach.vercel.app/musecoach) offers per-take device or private cloud recording storage.
 
 The combined implementation is maintained in the separate [private Workspace repository](https://github.com/SidAjmera/Workspace), locally alongside both original projects in `../Workspace`. Neither application is the parent product. This repository continues to contain the original standalone Toolnest implementation; the sections below describe that version unless stated otherwise.
 
