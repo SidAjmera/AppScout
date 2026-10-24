@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 const apps = JSON.parse(await readFile(new URL('../src/data/catalog.json', import.meta.url), 'utf8'));
 const quote = value => "'" + value.replaceAll("'", "''") + "'";
-const delimiter = '$appscout_catalog$';
+const delimiter = '$toolnest_catalog$';
 const rows = apps.map(app => {
   const json = JSON.stringify(app);
   if (json.includes(delimiter)) throw new Error('Catalog conflicts with SQL delimiter.');

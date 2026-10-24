@@ -1,6 +1,8 @@
 # Toolnest
 
-Formerly AppScout.
+Gmail SMTP setup is prepared but has not been applied or delivery-tested. See [private setup instructions](GMAIL_SMTP.md). Work is paused at the user's request; see [the resume checkpoint](RESUME_CHECKPOINT.md).
+
+Next planned feature: [API-powered catalog expansion beyond 159 apps](NEXT_STEPS.md).
 
 ## Shared Workspace
 
@@ -22,9 +24,9 @@ Next.js + TypeScript software discovery, alternatives and comparison app. Design
 
 **Live site:** https://toolnest-discover.vercel.app
 
-**Source:** https://github.com/SidAjmera/AppScout
+**Source:** https://github.com/SidAjmera/Toolnest
 
-Production is deployed from main through the connected Vercel GitHub integration. Production is connected to the AppScout Supabase project in Singapore. The live catalog endpoint returns source=database with 159 apps. Public URL/publishable-key environment variables and the server-only BYOK session secret are configured on Vercel. Authentication Site URL and exact production/local callback URLs are configured. Public signup still requires custom SMTP; email confirmation remains enabled.
+Production is deployed from main through the connected Vercel GitHub integration. Production is connected to the Toolnest Supabase project in Singapore. The live catalog endpoint returns source=database with 159 apps. Public URL/publishable-key environment variables and the server-only BYOK session secret are configured on Vercel. Authentication Site URL and exact production/local callback URLs are configured. Public signup still requires custom SMTP; email confirmation remains enabled.
 
 ## Run locally
 
@@ -40,7 +42,7 @@ Open http://127.0.0.1:3000. On PowerShell use `Copy-Item .env.example .env.local
 
 ## Supabase setup
 
-1. Create a Supabase project. In SQL Editor run [001_appscout.sql](supabase/migrations/001_appscout.sql).
+1. Create a Supabase project. In SQL Editor run [001_toolnest.sql](supabase/migrations/001_toolnest.sql).
 2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` from that project. The legacy `NEXT_PUBLIC_SUPABASE_ANON_KEY` remains supported as a fallback. Only the URL and chosen public key belong in public variables.
 3. Generate a 32-byte encryption secret with `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`. Set `BYOK_SESSION_SECRET` on the server. Do not prefix it with NEXT_PUBLIC.
 4. Seed the catalog: generate SQL with `pnpm catalog:sql` and run the generated `supabase/seed.sql` in the Supabase SQL editor after the migration. The SQL is repeatable and contains no credentials. Alternatively, load `.env.local` into the environment and run `node --env-file=.env.local scripts/seed.mjs`. This needs `SUPABASE_SERVICE_ROLE_KEY` locally; the script never prints it.
@@ -100,7 +102,7 @@ Playwright uses installed Microsoft Edge for desktop and mobile Chromium emulati
 
 Unit tests include 40 catalog retrieval scenarios, mandatory filtering, personalized ranking, search overrides, confidence, score consistency, cookie encryption/tampering/user isolation/expiry, private-network rejection, safe error messages and input schemas. An additional 9 tests execute the complete migration in embedded PostgreSQL (PGlite), verifying actual RLS isolation, consent enforcement/withdrawal, administrator permissions, FTS, deletion and quotas. Auth claims are supplied by fixtures; this does not replace a live Supabase Auth/email check or a live AI evaluation.
 
-Import the repository into Vercel, use the Next.js preset, set the environment variables above, and deploy. Keep service role and BYOK encryption secrets server-only. Set the correct Supabase auth URLs after receiving your free vercel.app domain. GitHub and Vercel hosting are now configured: the public repository is SidAjmera/AppScout and the Vercel project is appscout in sidajmera's projects (Hobby). Vercel uses Node 24 and ENABLE_EXPERIMENTAL_COREPACK=1 to honor the pinned pnpm version. The AppScout Supabase project is connected. Local .env.local is ignored by Git; never commit environment values.
+Import the repository into Vercel, use the Next.js preset, set the environment variables above, and deploy. Keep service role and BYOK encryption secrets server-only. Set the correct Supabase auth URLs after receiving your free vercel.app domain. GitHub and Vercel hosting are now configured: the public repository is SidAjmera/Toolnest and the Vercel project is toolnest in sidajmera's projects (Hobby). Vercel uses Node 24 and ENABLE_EXPERIMENTAL_COREPACK=1 to honor the pinned pnpm version. The Toolnest Supabase project is connected. Local .env.local is ignored by Git; never commit environment values.
 
 Live signup/login, email confirmation, cross-user database RLS, saved preferences/bookmarks, deletion and real provider calls require configured accounts and must be checked before launch. Use two disposable test accounts in a development Supabase project; verify that each cannot read or write the other's rows, consent withdrawal purges stored data, and each provider's invalid/expired/quota errors are understandable. Performance and recommendation quality targets in the brief remain goals until measured with real provider traffic and user testing.
 

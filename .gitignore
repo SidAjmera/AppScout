@@ -11,3 +11,5 @@ playwright-report/
 
 # Generated from the curated catalog; regenerate with pnpm catalog:sql.
 /supabase/seed.sql
+.venv/
+__pycache__/
